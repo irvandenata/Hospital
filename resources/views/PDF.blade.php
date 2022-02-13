@@ -101,6 +101,7 @@
                             @foreach($item->getData()->hasil_diagnosa->penyebab as $data)
                                 <li>{{ $data->nama }}</li>
                             @endforeach
+                             <li style="list-style-type: none;">Tambahan : {{ $item->getData()->tambahan_diagnosa_penyebab }}</li>
                         </ul>
                     </span></td>
                 <td align="left" valign="top" colspan="6" style="width: 60%; font-size:10px" class="padding text border-1">DIBUKTIKAN DENGAN : <br><br>
@@ -110,6 +111,7 @@
                         @foreach($item->getData()->hasil_diagnosa->data_subjektif as $data)
                             <li>{{ $data->nama }}</li>
                         @endforeach
+                        <li style="list-style-type: none;">Tambahan : {{ $item->getData()->tambahan_diagnosa_subjektif }}</li>
                     </ul>
 
 
@@ -119,6 +121,7 @@
                         @foreach($item->getData()->hasil_diagnosa->data_objektif as $data)
                             <li>{{ $data->nama }}</li>
                         @endforeach
+                         <li style="list-style-type: none;">Tambahan : {{ $item->getData()->tambahan_diagnosa_objektif }}</li>
                     </ul>
                 </td>
 
@@ -149,7 +152,7 @@
             </tr>
             <tr>
                 <td align="center" colspan="12" class="border-1 " style=" padding:3px 0">
-                    <span style="font-size: 10px;"><b>{{ $data->nama }} ({{ $data->kode }})</b></span><br>
+                    <span style="font-size: 10px;"><b>Intervensi : {{ $data->nama }} ({{ $data->kode }})</b></span><br>
 
                 </td>
             </tr>
@@ -162,7 +165,7 @@
                 <td colspan="6" class="padding border-1">
                     <span>Observasi</span><br>
                     <ul>
-                        @foreach($data->observasi as $value)
+                        @foreach($data->hasil_observasi as $value)
                             <li>{{ $value->nama }}</li>
                         @endforeach
 
@@ -170,7 +173,7 @@
                     <br>
                     <span>Terapeutik</span><br>
                     <ul>
-                        @foreach($data->terapeutik as $value)
+                        @foreach($data->hasil_terapeutik as $value)
                             <li>{{ $value->nama }}</li>
                         @endforeach
                     </ul>
@@ -178,14 +181,14 @@
                 <td colspan="6" class="padding border-1">
                     <span>Edukasi</span><br>
                     <ul>
-                        @foreach($data->edukasi as $value)
+                        @foreach($data->hasil_edukasi as $value)
                             <li>{{ $value->nama }}</li>
                         @endforeach
                     </ul>
                     <br>
                     <span>Kolaborasi</span><br>
                     <ul>
-                        @foreach($data->kolaborasi as $value)
+                        @foreach($data->hasil_kolaborasi as $value)
                             <li>{{ $value->nama }}</li>
                         @endforeach
                     </ul>
@@ -194,14 +197,18 @@
             @endforeach
 
             <tr>
-                <td align="center" valign='bottom' style="height: 200px" colspan="6">
-                    Pontianak,
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20 <br>Perawat Penanggung Jawab Asuhan
-                    <br><br><br>
-                    <br><br><br>
-                    <br><br>
-                    {{ $item->getData()->penanggung_jawab }}
-                    <hr width="100">
+                <td align="center" valign='bottom' style="height: 200px;" colspan="6">
+                    <div>
+                        Pontianak,
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 20 <br>
+                        Perawat Penanggung Jawab Asuhan
+                        <br><br><br>
+                        <br><br><br>
+                        <br><br>
+                        {{ $item->getData()->penanggung_jawab }}
+                        <hr width="100">
+                    </div>
+
 
                 </td>
                 <td align="center" valign='bottom' style="height: 200px" colspan="6">

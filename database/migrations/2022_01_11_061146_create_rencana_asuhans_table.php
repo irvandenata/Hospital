@@ -21,6 +21,9 @@ class CreateRencanaAsuhansTable extends Migration
             $table->string('tanggal');
             $table->string('jam');
             $table->string('ppja');
+            $table->text('tambahan_diagnosa_subjektif')->nullable();
+            $table->text('tambahan_diagnosa_objektif')->nullable();
+            $table->text('tambahan_diagnosa_penyebab')->nullable();
             $table->string('hasil_diagnosa');
             $table->string('hasil_luaran');
             $table->string('penanggung_jawab');

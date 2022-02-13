@@ -3,19 +3,34 @@
 <div class="row">
     <div class="col-6">
         <div class="form-group">
+            <input type="hidden" name="id" id="id">
             <div class="form-line">
                 <label for="name">Nama Penanggung Jawab</label>
-                <input type="text" name="penanggung_jawab" class="form-control" required>
+                <input type="text" id="pj" name="penanggung_jawab" class="form-control pj" required>
             </div>
             <div class="row">
                 <div class="col-6">
                     <div class="form-line mt-2">
-                        <label for="name">Tanggal</label> <input type="text" name="tanggal" class="form-control" required>
+                        <label class="control-label ">Tanggal</label>
+                        <div class="">
+                            <div class="input-group">
+                                <input autocomplete="off" type="text" class="form-control tgl" name="tanggal" placeholder="mm/dd/yyyy" id="datepicker-autoclose" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="ti-calendar"></i></span>
+                                </div>
+                            </div><!-- input-group -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-line mt-2">
-                        <label for="name">Jam</label> <input type="text" name="jam" class="form-control" required>
+                        <label for="name">Jam</label>
+                        <div class="input-group">
+                            <input autocomplete="off" id="timepicker2"  name="jam" type="text" class="form-control wkt" required>
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -26,18 +41,18 @@
         <div class="form-group">
             <div class="form-line">
                 <label for="name">Nama Ruangan</label>
-                <input type="text" name="nama_ruangan" class="form-control" required>
+                <input type="text" name="nama_ruangan" class="form-control ruang" required>
             </div>
             <div class="form-line mt-2">
                 <label for="name">PPJA</label>
-                <input type="text" name="ppja" class="form-control" required>
+                <input type="text" name="ppja" class="form-control ppja" required>
             </div>
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label for="type">Diagnosa</label>
-            <select class="form-control show-tick" name="diagnosa_id" id="diagnosa" required>
+            <select class="form-control show-tick diagnosa" name="diagnosa_id" id="diagnosa" required>
                 <option disabled selected value>---- Pilih Salah Satu ----</option>
                 @foreach($diagnosa as $item)
                     <option value="{!! $item->id !!}">{!! $item->diagnosis !!} - {!! $item->kode !!}</option>
@@ -76,7 +91,7 @@
     <div class="col-12">
         <div class="form-group">
             <div class="form-line">
-                <label for="name">Jumlah Intervensi dalam 24 Jam</label> <input type="number" name="jumlah_intervensi" class="form-control" required>
+                <label for="name">Jumlah Intervensi dalam 24 Jam</label> <input type="number" name="jumlah_intervensi" class="form-control interv" required>
             </div>
         </div>
     </div>
@@ -103,7 +118,7 @@
     <div class="col-10">
         <div class="form-group">
             <label for="type">Intervensi</label>
-            <select class="form-control show-tick" name="intervensi_id" id="intervensiSelect" required>
+            <select class="form-control show-tick" id="intervensiSelect" >
                 <option disabled selected value>---- Pilih Salah Satu ----</option>
                 @foreach($intervensi as $item)
                     <option value="{!! $item->id !!}">{!! $item->intervensi_keperawatan !!} - {!! $item->kode !!}</option>
@@ -119,23 +134,5 @@
     </div>
 </div>
 
-
-
-{{-- <div class="form-group">
-    <div class="form-line">
-        <label for="number">Gambar Produk</label>
-        <input type="text" name="name" class="form-control">
-    </div>
-</div> --}}
-
-{{-- <div class="form-group">
-   <label for="type">Pilih Salah Satu</label>
-   <select class="form-control show-tick" name="type_id" id="typeID" required>
-      <option disabled selected value>---- Pilih Salah Satu ----</option>
-@foreach($type as $item)
-      <option value="{!! $item->id !!}">{!! $item->name !!}</option>
-@endforeach
-   </select>
-</div> --}}
 
 @endsection

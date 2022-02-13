@@ -1,5 +1,5 @@
 <div class="modal fade " id="modalDetail" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-xl " role="document">
+    <div class="modal-dialog modal-lg " role="document">
         <div class="modal-content p-3">
             <div class="modal-header">
                 <h4 class="modal-title" id="modalFormTitle">Detail Data</h4>
@@ -8,17 +8,17 @@
                 <div class="row">
                     <div class="col-6">
                         <div>Penanggung Jawab</div>
-                        <h4 id="penjaw" class="text-bold"></h4>
+                        <h3 id="penjaw" class="text-bold"></h3>
                         <div>Diagnosis Keperawatan</div>
-                        <h4 class="diagnosis" class="text-bold"></h4>
+                        <h3 class="diagnosis" class="text-bold"></h3>
                         <div>Tanggal dan Jam</div>
-                        <h4 id="time" class="text-bold"></h4>
+                        <h3 id="time" class="text-bold"></h3>
                     </div>
                     <div class="col-6">
                         <div>Nama Ruangan</div>
-                        <h4 id="room" class="text-bold"></h4>
+                        <h3 id="room" class="text-bold"></h3>
                         <div>PPJA</div>
-                        <h4 id="ppja" class="text-bold"></h4>
+                        <h3 id="ppja" class="text-bold"></h3>
                     </div>
                 </div>
                 <hr>
@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-6">
                         <h6 class="diagnosis"></h6>
-                        <p>Berhubungan dengan : </p>
+                        <div>Berhubungan dengan : </div>
                         <ul class="ml-2 penyebab">
 
                         </ul>

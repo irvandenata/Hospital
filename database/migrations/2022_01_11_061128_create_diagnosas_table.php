@@ -17,7 +17,7 @@ class CreateDiagnosasTable extends Migration
             $table->id();
             $table->string('kode');
             $table->string('diagnosis');
-            $table->string('definisi');
+            $table->text('definisi');
             $table->timestamps();
         });
     }
