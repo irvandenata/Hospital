@@ -1,45 +1,100 @@
 @extends('layouts.app')
 @section('title', $title)
 @push('styles')
+ <link rel="stylesheet" href="{{ asset('admin') }}/plugins/morris/morris.css">
     <link href="{{ asset('admin') }}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin') }}/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+     <script src="{{ asset('admin') }}/js/modernizr.min.js"></script>
+
+@endpush
+@push('css')
+    <style>
+        .mb-0 {
+            margin: 0px 0px !important
+        }
+
+    </style>
 @endpush
 @section('content')
-<div class="row justify-content-between">
-    <div class="col-12 text-right mb-2">
-        <button type="button" id="reload" class="btn btn-outline-warning">Reload</button>
-        <button type="button" id="create" class="btn btn-outline-success">Create</button>
-    </div>
-    <div class="col-md-12 stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="datatable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th width="10%">No</th>
-                                <th>Penanggung Jawab</th>
-                                <th>Ruangan</th>
-                                <th>Tanggal</th>
-                                <th>Jam</th>
-                                <th>PPJA</th>
-                                <th width="10%">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+<div class="row">
 
-                        </tbody>
-                    </table>
+    <!-- end col -->
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card-box">
+            <div class="widget-box-2">
+                <div class="widget-detail-2">
+                    <h1 class="m-0"> 8451 </h1>
+                    <h4 class="text-muted m-0 m-b-10">Jumlah Asuhan</h4>
                 </div>
-
+                <div class="progress progress-bar-success-alt progress-sm mb-0">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                        <span class="sr-only">100% Complete</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <iframe id="printf" style="display: none" name="printf"></iframe>
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+        <div class="card-box">
+            <div class="widget-box-2">
+                <div class="widget-detail-2">
+                    <h1 class="m-0"> 8451 </h1>
+                    <h4 class="text-muted m-0 m-b-10">Jumlah Data Diagnosa</h4>
+                </div>
+                <div class="progress progress-bar-danger-alt progress-sm mb-0">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                        <span class="sr-only">100% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card-box">
+            <div class="widget-box-2">
+                <div class="widget-detail-2">
+                    <h1 class="m-0"> 8451 </h1>
+                    <h4 class="text-muted m-0 m-b-10">Jumlah Data Luaran</h4>
+                </div>
+                <div class="progress progress-bar-primary-alt progress-sm mb-0">
+                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                        <span class="sr-only">100% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card-box">
+            <div class="widget-box-2">
+                <div class="widget-detail-2">
+                    <h1 class="m-0"> 8451 </h1>
+                    <h4 class="text-muted m-0 m-b-10">Jumlah Data Intervensi</h4>
+                </div>
+                <div class="progress progress-bar-warning-alt progress-sm mb-0">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                        <span class="sr-only">100% Complete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="col-xl-12">
+        <div class="card-box">
+            <div class="dropdown pull-right">
+                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
+                    <i class="mdi mdi-dots-vertical"></i>
+                </a>
+
+            </div>
+            <h4 class="header-title mt-0">Data Asuhan Perhari</h4>
+            <div id="morris-bar-example" style="height: 280px;"></div>
+        </div>
+    </div>
 </div>
-@include('admin.asuh._form')
-@include('admin.asuh._detail')
+
 @endsection
 
 
@@ -48,93 +103,84 @@
     <script src="{{ asset('admin') }}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    <script src="{{ asset('admin') }}/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="{{ asset('admin') }}/plugins/morris/morris.min.js"></script>
+	<script src="{{ asset('admin') }}/plugins/raphael/raphael-min.js"></script>
+
+        <!-- App js -->
+    <script src="{{ asset('admin') }}/js/jquery.core.js"></script>
+    <script src="{{ asset('admin') }}/js/jquery.app.js"></script>
 @endpush
 
 @push('js')
     @include('crud.js')
     <script>
-        $('#datepicker-autoclose').datepicker({
-            autoclose: true,
-            todayHighlight: true
+      !function($) {
+    "use strict";
+
+    var Dashboard1 = function() {
+    	this.$realData = []
+    };
+
+    //creates Bar chart
+    Dashboard1.prototype.createBarChart  = function(element, data, xkey, ykeys, labels, lineColors) {
+        Morris.Bar({
+            element: element,
+            data: data,
+            xkey: xkey,
+            ykeys: ykeys,
+            labels: labels,
+            hideHover: 'auto',
+            resize: true, //defaulted to true
+            gridLineColor: '#eeeeee',
+            pointFillColors:'#eeeeee',
+            labelColor: '#000000',
+            pointFillColors: '#000000',
+            barSizeRatio: 0.2,
+            barColors: lineColors
         });
+    }
 
-        $('#timepicker2').timepicker({
-            showMeridian: false,
-            icons: {
-                up: 'mdi mdi-chevron-up',
-                down: 'mdi mdi-chevron-down'
-            }
-        });
+    //creates line chart
 
-        let dataTable = $('#datatable').DataTable({
-            dom: 'lBfrtip',
-            buttons: [{
-                className: 'btn btn-success btn-sm mr-2',
-                text: 'Create',
-                action: function (e, dt, node, config) {
-                    createItem();
-                }
-            }, {
-                className: 'btn btn-warning btn-sm mr-2',
-                text: 'Reload',
-                action: function (e, dt, node, config) {
-                    reloadDatatable();
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Reload'
-                    })
-                }
-            }],
 
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            searching: true,
-            pageLength: 5,
-            lengthMenu: [
-                [5, 10, 15, -1],
-                [5, 10, 15, "All"]
-            ],
-            ajax: {
-                url: child_url,
-                type: 'GET',
-            },
-            columns: [{
-                    data: 'DT_RowIndex',
-                    orderable: false
-                },
-                {
-                    data: 'penanggung_jawab',
-                    orderable: true
-                },
-                {
-                    data: 'nama_ruangan',
-                    orderable: true
-                },
-                {
-                    data: 'tanggal',
-                    orderable: true
-                },
-                {
-                    data: 'jam',
-                    orderable: true
-                },
-                {
-                    data: 'ppja',
-                    orderable: true
-                },
+    //creates Donut chart
 
-                {
-                    data: 'action',
-                    name: '#',
-                    orderable: false
-                },
-            ]
-        });
 
-        function reloadDatatable() {
-            dataTable.ajax.reload();
-        };
+
+    Dashboard1.prototype.init = function() {
+
+        //creating bar chart
+        var $barData  = [
+            { y: '10', a: 75 },
+            { y: '11', a: 42 },
+            { y: '12', a: 75 },
+            { y: '13', a: 38 },
+            { y: '14', a: 19 },
+            { y: '16', a: 93 },
+            { y: '17', a: 56 },
+            { y: '18', a: 48 },
+            { y: '19', a: 79 },
+        ];
+        this.createBarChart('morris-bar-example', $barData, 'y', ['a'], ['Data Asuhan'], ['#188ae2']);
+
+        //create line chart
+
+
+        //creating donut chart
+
+    },
+    //init
+    $.Dashboard1 = new Dashboard1
+    $.Dashboard1.Constructor = Dashboard1
+}(window.jQuery),
+
+//initializing
+function($) {
+    "use strict";
+    $.Dashboard1.init();
+}(window.jQuery);
 
     </script>
 
@@ -181,6 +227,8 @@
 
 
         async function setItem(data) {
+
+
             sessionStorage.setItem("subj", (data.tambahan_diagnosa_subjektif == null ? '' : data.tambahan_diagnosa_subjektif));
             sessionStorage.setItem("obj", (data.tambahan_diagnosa_objektif == null ? '' : data.tambahan_diagnosa_objektif));
             sessionStorage.setItem("peny", (data.tambahan_diagnosa_penyebab == null ? '' : data.tambahan_diagnosa_penyebab));
@@ -195,12 +243,11 @@
             $('#id').val(data.id)
             $('.tgl').val(data.tanggal)
             $('.wkt').val(data.jam)
-
-            $('.ekspektasi option[value="' + data.ekspektasi + '"]').prop("selected", true);
             $('.ruang').val(data.nama_ruangan)
             $('.ppja').val(data.ppja)
+            $('.ppja').val(data.ppja)
             $('.interv').val(data.jumlah_intervensi)
-            await getEditKriteria($('#luaran').val(), data.hasil_luaran.kriteria_hasil,data.hasil_luaran.kriteria_sub)
+            await getEditKriteria($('#luaran').val(), data.hasil_luaran.kriteria_hasil)
             $.each(data.intervensi, function (index, value) {
                 getEditIntervensi(value.id, value)
             });
@@ -305,12 +352,9 @@
 
         }
 
-        function setEditKriteria(data, result,mentah) {
-
+        function setEditKriteria(data, result) {
             let ang = result
-            let dataKriteria = data
-            let mentahKriteria = mentah.split("/")
-            // console.log(mentahKriteria)
+
             $('#kriteriahasil').empty()
             $.each(data, function (index, value) {
                 var cek = ''
@@ -319,53 +363,18 @@
                         cek = 'checked'
                     }
                 })
-                $('#kriteriahasil').append('<div class="ml-5"><input id="kriteria-'+value.id+'" class="form-check-input pilihKriteria" name="hasil_kriteriahasil[]" type="checkbox" value="' + value.id + '" ' + cek + '><label class="form-check-label" for="flexCheckChecked">' + value.nama + '</label><div class="tampKrit"></div></div>')
-                $.each(ang, function (index, b) {
-
-                       $('.pilihKriteria').click(async function () {
-                            if ($(this).is(":checked")) {
-
-                                var kri = data[data.findIndex(x => x.id == $(this).val())].kelompok.split(";");
-                                await $(this).parent().find('.tampKrit').append(`  <select class="form-control show-tick subkrit my-2" name="hasil_kriteria2[]" ><option disabled selected value>---- Pilih Salah Satu ----</option></select>`)
-                                var com = this
-                                // console.log($(this).parent().find('.tampKrit'))
-                                $.each(kri, function (index, value) {
-                                    $(com).parent().find('.tampKrit').find('.subkrit').append('<option value="' + value + '">' + value + '</option>')
-                                });
-                            } else if ($(this).is(":not(:checked)")) {
-                                $(this).parent().find('.tampKrit').empty()
-                            }
-                        });
-                })
-
-                 if ( cek == 'checked') {
-                        // console.log(data.findIndex(x => x.id == value.id))
-                        var kri = data[data.findIndex(x => x.id == value.id)].kelompok.split(";");
-                        // console.log(kri)
-                        var kri = dataKriteria[data.findIndex(x => x.id == value.id)].kelompok.split(";");
-                                $("#kriteria-"+value.id).parent().find('.tampKrit').append(`<select class="form-control show-tick subkrit my-2" name="hasil_kriteria2[]" ><option disabled selected value>---- Pilih Salah Satu ----</option></select>`)
-                                let id = value.id
-                                // console.log($("#kriteria-"+value.id).parent().find('.tampKrit'))
-                                $.each(kri, function (index, value) {
-                                    $("#kriteria-"+id).parent().find('.tampKrit').find('.subkrit').append('<option value="' + value + '">' + value + '</option>')
-                                });
-                                // console.log(mentahKriteria[index].split("-")[1])
-                       $("#kriteria-"+id).parent().find('.tampKrit').find('.subkrit option[value="'+ mentahKriteria[index].split("-")[1] +'"]').attr('selected','selected');
-                    }
-
-
-
+                $('#kriteriahasil').append('<div class="ml-5"><input class="form-check-input kriteriahasil" name="hasil_kriteriahasil[]" type="checkbox" value="' + value.id + '" ' + cek + '><label class="form-check-label" for="flexCheckChecked">' + value.nama + '</label></div>')
             });
         }
 
-        function getEditKriteria(id, res,data) {
+        function getEditKriteria(id, res) {
 
             $.ajax({
                 url: "/api/kriteria/" + id,
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
-                    setEditKriteria(result, res,data)
+                    setEditKriteria(result, res)
                 },
                 error: function (result) {
                     console.log(result);
@@ -443,7 +452,7 @@
         ///DETAIL ITEM
 
         function setDetail(item) {
-            // console.log(item)
+
             $('#modalDetail').modal('show');
             $('#penjaw').empty()
             $('#penjaw').append(item.penanggung_jawab)
@@ -458,17 +467,14 @@
             $('.lamaIntervensi').empty()
             $('.lamaIntervensi').append(item.jumlah_intervensi)
             $('.luaran').empty()
-
             $('.luaran').append(item.luaran.luaran + " ( " + item.luaran.kode + " )")
             $('.penyebab').empty()
-            $('.ekspektasiDetail').empty()
             $('#print').empty()
             $('#download').empty()
 
             $('#print').append("Print")
             $('#download').append("Download")
             $('#print').data('id', item.id);
-            $('.ekspektasiDetail').append(item.ekspektasi)
             $.each(item.hasil_diagnosa.penyebab, function (index, value) {
 
                 $('.penyebab').append("<li>" + value.nama + "</li>")
@@ -490,7 +496,7 @@
             $('.kriteriaHasil').empty()
             $.each(item.hasil_luaran.kriteria_hasil, function (index, value) {
 
-                $('.kriteriaHasil').append("<li>" + value.nama + " : " +item.hasil_luaran.kriteria_sub.split("/")[index].split("-")[1]+ "</li>")
+                $('.kriteriaHasil').append("<li>" + value.nama + "</li>")
             });
             $('.data').empty()
 
@@ -701,43 +707,13 @@
             getKriteria($('#luaran').val())
         });
 
-
-
-
-
-
         function setKriteria(data) {
             $('#kriteriahasil').empty()
-            let dataKriteria = data
             $.each(data, function (index, value) {
 
-                $('#kriteriahasil').append('<div class="ml-5 "><input class="form-check-input pilihKriteria"  name="hasil_kriteriahasil[]" type="checkbox" value="' + value.id + '"><label class="form-check-label" for="flexCheckChecked">' + value.nama + '</label><div class="tampKrit"></div></div>')
-
-
-
-            });
-            $('.pilihKriteria').click(async function () {
-                if ($(this).is(":checked")) {
-                    // console.log(data)
-                    // console.log($(this).val())
-                    var kri = data[data.findIndex(x => x.id == $(this).val())].kelompok.split(";");
-                    await $(this).parent().find('.tampKrit').append(`  <select class="form-control show-tick subkrit my-2" name="hasil_kriteria2[]" >
-                        <option disabled selected value>---- Pilih Salah Satu ----</option>
-                    </select>`)
-                    var com = this
-                    console.log($(this).parent().find('.tampKrit'))
-                    $.each(kri, function (index, value) {
-                        $(com).parent().find('.tampKrit').find('.subkrit').append('<option value="' + value + '">' + value + '</option>')
-                    });
-                } else if ($(this).is(":not(:checked)")) {
-                    $(this).parent().find('.tampKrit').empty()
-                }
+                $('#kriteriahasil').append('<div class="ml-5"><input class="form-check-input kriteriahasil" name="hasil_kriteriahasil[]" type="checkbox" value="' + value.id + '"><label class="form-check-label" for="flexCheckChecked">' + value.nama + '</label></div>')
             });
         }
-
-
-
-
 
         function getKriteria(id) {
             $.ajax({

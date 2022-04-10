@@ -64,6 +64,7 @@ class LuaranController extends Controller
         $item = new Luaran();
         $item->luaran = $request->luaran;
         $item->kode = $request->kode;
+        $item->kelompok = $request->kelompok;
         $item->save();
         return $item;
     }
@@ -103,6 +104,7 @@ class LuaranController extends Controller
         $luaran = Luaran::where('id', $id)->first();
         $luaran->luaran = $request->luaran;
         $luaran->kode = $request->kode;
+        $luaran->kelompok = $request->kelompok;
         $luaran->save();
 
         return $luaran;

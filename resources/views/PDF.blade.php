@@ -139,17 +139,18 @@
             </tr>
             <tr>
                 <td colspan="12" class="padding border-1">
-                    <span>Setelah dilakukan intervensi selama {{ $item->getData()->jumlah_intervensi }} x 24 jam, {{ $item->getData()->luaran->luaran }} ({{ $item->getData()->luaran->kode }}) meningkat dengan kriteria hasil:</span><br>
+                    <span>Setelah dilakukan intervensi selama {{ $item->getData()->jumlah_intervensi }} x 24 jam, {{ $item->getData()->luaran->luaran }} ({{ $item->getData()->luaran->kode }}) {{ $item->getData()->ekspektasi }} dengan kriteria hasil:</span><br>
                     <ul>
-                        @foreach($item->getData()->hasil_luaran->kriteria_hasil as $data)
-                            <li>{{ $data->nama }}</li>
+                        @foreach($item->getData()->hasil_luaran->kriteria_hasil as $index=>$data)
+                            <li>{{ $data->nama }}  : {{ explode('-',explode("/",$item->getData()->hasil_luaran->kriteria_sub)[$index])[1] }} </li>
                         @endforeach
                     </ul>
                 </td>
 
 
-                @foreach($item->getData()->intervensi as $data)
+
             </tr>
+              @foreach($item->getData()->intervensi as $data)
             <tr>
                 <td align="center" colspan="12" class="border-1 " style=" padding:3px 0">
                     <span style="font-size: 10px;"><b>Intervensi : {{ $data->nama }} ({{ $data->kode }})</b></span><br>
@@ -195,7 +196,6 @@
                 </td>
             </tr>
             @endforeach
-
             <tr>
                 <td align="center" valign='bottom' style="height: 200px;" colspan="6">
                     <div>
@@ -204,8 +204,8 @@
                         Perawat Penanggung Jawab Asuhan
                         <br><br><br>
                         <br><br><br>
-                        <br><br>
-                        {{ $item->getData()->penanggung_jawab }}
+                        <br><br><br>
+
                         <hr width="100">
                     </div>
 
@@ -216,7 +216,8 @@
                     <br>Kepala Ruangan
                     <br><br><br>
                     <br><br><br>
-                    <br><br><br>
+                    <br><br>
+                    {{ $item->getData()->penanggung_jawab }}
                     <hr width="100">
 
                 </td>

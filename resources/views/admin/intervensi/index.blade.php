@@ -194,10 +194,13 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (result) {
-                    if (jenis == 'terapeutik') reloadDatatableTerapeutik();
+                    if (jenis == 'terapeutik') {
+
+                        reloadDatatableTerapeutik()
+                    };
                     if (jenis == 'kolaborasi') reloadDatatableKolaborasi();
-                    if (jenis == 'observasi') reloadDatatableObjektif();
-                    if (jenis == 'edukasi') reloadDatatableSubjektif();
+                    if (jenis == 'observasi') reloadDatatableObservasi();
+                    if (jenis == 'edukasi') reloadDatatableEdukasi();
                 },
                 error: function (result) {
                     // $('#modal').modal('hide');
@@ -214,6 +217,7 @@
                 'Data diubah',
                 'success'
             )
+
             $(".nama").val('')
         }
 
@@ -814,6 +818,205 @@
                 ]
             });
         }
+
+
+
+           //EDUKASI
+        $('#saveEdukasi').on('click', function (e) {
+            if ($(".edukasi").val() != '') {
+                e.preventDefault();
+                saveEdukasi()
+
+            }
+
+        })
+
+        function saveEdukasi() {
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true,
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are You Sure ?',
+                text: "Kamu Akan Menambah Edukasi!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!',
+                cancelButtonText: 'No, Quit!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    var nama = $(".edukasi").val();
+
+                    $.ajax({
+                        url: '/api/simpan-edukasi',
+                        type: "post",
+                        cache: false,
+                        dataType: 'json',
+                        data: {
+                            nama: nama,
+                            intervensi_id: sessionStorage.getItem('idIntervensi')
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (result) {
+                            reloadDatatableEdukasi();
+                        },
+                        error: function (result) {
+                            // $('#modal').modal('hide');
+
+                            if (result.responseJSON) {
+                                getError(result.responseJSON.errors);
+                            } else {
+                                console.log(result);
+                            }
+                        },
+                    })
+                    swalWithBootstrapButtons.fire(
+                        'Success!',
+                        'Data ditambahkan',
+                        'success'
+                    )
+                    $(".edukasi").val('')
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancel',
+                        'Process Has Been Canceled',
+                        'error'
+                    )
+                }
+            })
+        }
+
+        function deleteEdukasi(id) {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true,
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are You Sure ?',
+                text: "Kamu Akan Menghapus Data Edukasi Ini!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!',
+                cancelButtonText: 'No, Quit!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+
+
+                    $.ajax({
+                        url: '/api/hapus-edukasi/' + id,
+                        type: "DELETE",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+
+                        success: function (result) {
+                            reloadDatatableEdukasi();
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Delete successfully'
+                            })
+
+                            // toastr.success('Berhasil Dihapus', 'Success');
+                        },
+                        error: function (errors) {
+                            getError(errors.responseJSON.errors);
+                        }
+                    });
+                    swalWithBootstrapButtons.fire(
+                        'Success!',
+                        'Edukasi Berhasil dihapus',
+                        'success'
+                    )
+
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancel',
+                        'Process Has Been Canceled',
+                        'error'
+                    )
+                }
+            })
+        }
+
+        function reloadDatatableEdukasi() {
+            $('#detailEdukasi').DataTable().ajax.reload();
+        }
+
+        function detailEdukasi(id) {
+            sessionStorage.setItem('idIntervensi', id)
+            $('#modalDetailEdukasi').modal('show');
+            $('#detailEdukasi').dataTable().fnClearTable();
+            $('#detailEdukasi').dataTable().fnDestroy();
+            let dataTableEdukasi = $('#detailEdukasi').DataTable({
+                dom: 'lBfrtip',
+                buttons: [{
+                    className: 'btn btn-warning btn-sm mr-2',
+                    text: 'Reload',
+                    action: function (e, dt, node, config) {
+                        reloadDatatableEdukasi();
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Reload'
+                        })
+                    }
+                }, , ],
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                searching: true,
+
+                pageLength: 5,
+
+                lengthMenu: [
+                    [5, 10, 15, -1],
+                    [5, 10, 15, "All"]
+                ],
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '/api/edukasi-table',
+                    type: 'POST',
+                    data: {
+                        id: id
+                    },
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        orderable: false
+                    },
+                    {
+                        data: 'nama',
+                        orderable: true
+                    },
+                    {
+                        data: 'action',
+                        name: '#',
+                        orderable: false
+                    },
+                ]
+            });
+        }
+
 
 
 

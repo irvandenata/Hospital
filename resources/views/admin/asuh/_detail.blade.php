@@ -7,7 +7,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-6">
-                        <div>Penanggung Jawab</div>
+                        <div>Kepala Ruangan</div>
                         <h3 id="penjaw" class="text-bold"></h3>
                         <div>Diagnosis Keperawatan</div>
                         <h3 class="diagnosis" class="text-bold"></h3>
@@ -54,7 +54,7 @@
                 <h3>Luaran dan Kriteria Hasil</h3>
 
                 <span> Setelah dilakukan intervensi selama</span>
-                <span class="lamaIntervensi"></span> x 24 jam, <span class="luaran"></span> <span>meningkat dengan kriteria hasil:</span>
+                <span class="lamaIntervensi"></span> x 24 jam, <span class="luaran"></span> <span> <span class="ekspektasiDetail"></span> dengan kriteria hasil:</span>
                 <ul class="ml-2 kriteriaHasil">
 
                 </ul>

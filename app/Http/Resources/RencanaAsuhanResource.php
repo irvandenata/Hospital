@@ -7,6 +7,8 @@ use App\Models\DataSubjektif;
 use App\Models\Edukasi;
 use App\Models\IntervensiRencanaAsuhan;
 use App\Models\Kolaborasi;
+use App\Models\KriteriaHasil;
+use App\Models\Luaran;
 use App\Models\Observasi;
 use App\Models\Penyebab;
 use App\Models\Terapeutik;
@@ -39,6 +41,12 @@ class RencanaAsuhanResource extends JsonResource
 
             $dataIntervensi[$key] = $intervensi;
         }
+        $kriteria_hasil = array();
+        $tamp = explode("/", $this->hasil_luaran);
+        foreach ($tamp as $key => $value) {
+            $tamp2 = explode("-", $value);
+            array_push($kriteria_hasil, $tamp2[0]);
+        }
         $data = explode("/", $this->hasil_diagnosa);
         return [
             'id' => $this->id,
@@ -49,6 +57,7 @@ class RencanaAsuhanResource extends JsonResource
             'ppja' => $this->ppja,
             'diagnosa' => $this->diagnosa,
             'luaran' => $this->luaran,
+            'ekspektasi' => $this->ekspektasi,
             'tambahan_diagnosa_objektif' => $this->tambahan_diagnosa_objektif,
             'tambahan_diagnosa_subjektif' => $this->tambahan_diagnosa_subjektif,
             'tambahan_diagnosa_penyebab' => $this->tambahan_diagnosa_penyebab,
@@ -60,7 +69,9 @@ class RencanaAsuhanResource extends JsonResource
             ],
 
             'hasil_luaran' => [
-                'kriteria_hasil' => Penyebab::whereIn('id', explode(",", $this->hasil_luaran))->get(),
+                'kriteria_hasil' => KriteriaHasil::whereIn('id', $kriteria_hasil)->get(),
+                'kriteria_sub' => $this->hasil_luaran,
+
             ],
             'jumlah_intervensi' => $this->jumlah_intervensi,
             'intervensi' => $dataIntervensi,

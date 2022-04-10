@@ -18,6 +18,7 @@
 
     function editData(id) {
         ids = id
+        sessionStorage.setItem('idEdit',id)
         $.ajax({
             url: child_url + "/" + id + "/edit",
             type: "GET",
@@ -34,8 +35,7 @@
 
     function setUrl() {
         if (save_method == "create") url = child_url;
-        else url = child_url + '/' + ids;
-
+        else url = child_url + '/' + sessionStorage.getItem('idEdit');
         return url;
     }
 
@@ -80,8 +80,6 @@
     });
 
     function saveAjax(url) {
-
-
         // alert(file)
         Swal.showLoading()
         var checkbox = $("#myForm").find("input[type=checkbox]");
@@ -138,7 +136,10 @@
             },
             error: function (result) {
                 $('#modalForm').modal('hide');
-
+                 Toast.fire({
+                    icon: 'error',
+                    title: 'Terjadi Kesalahan'
+                })
                 if (result.responseJSON) {
                     getError(result.responseJSON.errors);
                 } else {

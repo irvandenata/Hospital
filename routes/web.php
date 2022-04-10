@@ -14,9 +14,11 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return redirect('/data-asuh');
+    return redirect('/dashboard');
 });
 Route::resource('/data-asuh', App\Http\Controllers\RencanaAsuhanController::class);
+Route::resource('/dashboard', App\Http\Controllers\DashboardController::class);
+
 Route::resource('/diagnosa', App\Http\Controllers\DiagnosaController::class);
 Route::resource('/luaran', App\Http\Controllers\LuaranController::class);
 Route::resource('/intervensi', App\Http\Controllers\IntervensiController::class);

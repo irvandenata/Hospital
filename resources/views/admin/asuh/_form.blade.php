@@ -5,7 +5,7 @@
         <div class="form-group">
             <input type="hidden" name="id" id="id">
             <div class="form-line">
-                <label for="name">Nama Penanggung Jawab</label>
+                <label for="name">Nama Kepala Ruangan</label>
                 <input type="text" id="pj" name="penanggung_jawab" class="form-control pj" required>
             </div>
             <div class="row">
@@ -103,6 +103,18 @@
                 @foreach($luaran as $item)
                     <option value="{!! $item->id !!}">{!! $item->luaran !!} - {!! $item->kode !!}</option>
                 @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-group">
+            <label for="type">Ekspektasi Luaran</label>
+            <select class="form-control show-tick ekspektasi" name="ekspektasi" id="luaran" required>
+                <option disabled selected value>---- Pilih Salah Satu ----</option>
+                    <option value="Meningkat">Meningkat</option>
+                    <option value="Menurun">Menurun</option>
+                    <option value="Membaik">Membaik</option>
+
             </select>
         </div>
     </div>

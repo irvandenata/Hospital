@@ -67,7 +67,16 @@ class RencanaAsuhanController extends Controller
     public function store(Request $request)
     {
         $intervensi = array();
-        $luaran = isset($request->hasil_kriteriahasil) && count($request->hasil_kriteriahasil) > 0 ? implode(',', $request->hasil_kriteriahasil) : '';
+        $luaran = '';
+        if ((isset($request->hasil_kriteriahasil) && count($request->hasil_kriteriahasil)) && (isset($request->hasil_kriteria2) && count($request->hasil_kriteria2))) {
+            foreach ($request->hasil_kriteriahasil as $key => $value) {
+                if ($key == 0) {
+                    $luaran = $value . '-' . $request->hasil_kriteria2[$key];
+                } else {
+                    $luaran = $luaran . "/" . $value . '-' . $request->hasil_kriteria2[$key];
+                }
+            }
+        }
         $h_sbj = isset($request->hasil_subjektif) && count($request->hasil_subjektif) > 0 ? implode(',', $request->hasil_subjektif) : '';
         $h_obj = isset($request->hasil_objektif) && count($request->hasil_objektif) > 0 ? implode(',', $request->hasil_objektif) : '';
         $h_penyebab = isset($request->hasil_penyebab) && count($request->hasil_penyebab) > 0 ? implode(',', $request->hasil_penyebab) : '';
@@ -79,6 +88,7 @@ class RencanaAsuhanController extends Controller
             'diagnosa_id' => $request->diagnosa_id,
             'hasil_diagnosa' => $h_penyebab . "/" . $h_obj . '/' . $h_sbj,
             'luaran_id' => $request->luaran_id,
+            'ekspektasi' => $request->ekspektasi,
             'hasil_luaran' => $luaran,
             'penanggung_jawab' => $request->penanggung_jawab,
             'jumlah_intervensi' => $request->jumlah_intervensi,
@@ -148,6 +158,7 @@ class RencanaAsuhanController extends Controller
         $item->diagnosa_id = $request->diagnosa_id;
         $item->hasil_diagnosa = $h_penyebab . "/" . $h_obj . '/' . $h_sbj;
         $item->luaran_id = $request->luaran_id;
+        $item->ekspektasi = $request->ekspektasi;
         $item->hasil_luaran = $luaran;
         $item->penanggung_jawab = $request->penanggung_jawab;
         $item->jumlah_intervensi = $request->jumlah_intervensi;
@@ -178,9 +189,10 @@ class RencanaAsuhanController extends Controller
     public function destroy($id)
     {
         $item = RencanaAsuhan::where('id', $id)->first();
-        $item->intervensis()->detach();
+        if (count($item->intervensis) > 0) {
+            $item->intervensis()->detach();
+        }
         $item->delete();
         return response()->json([201, "Success"]);
-
     }
 }

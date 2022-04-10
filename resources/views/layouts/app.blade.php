@@ -44,7 +44,7 @@
 
             <!-- LOGO -->
             <div class="topbar-left">
-                <a href="index.html" class="logo"><span>Admin<span>to</span></span><i class="mdi mdi-layers"></i></a>
+                <a href="index.html" class="logo"><span>Admin<span>RS</span></span><i class="mdi mdi-layers"></i></a>
             </div>
 
             <!-- Button mobile view to collapse sidebar menu -->
@@ -133,10 +133,9 @@
         <div id="sidebar-menu">
             <ul>
                 <li class="text-muted menu-title">Navigation</li>
-
-                <li>
-                    <a href="index.html" class="waves-effect"><i class="mdi mdi-view-dashboard"></i><span>Dashboard </span> </a>
-                </li>
+                {{-- <li>
+                    <a href="/dashboard" class="waves-effect"><i class="mdi mdi-view-dashboard"></i><span>Dashboard </span> </a>
+                </li> --}}
                  <li>
                     <a href="/data-asuh" class="waves-effect"><i class="mdi mdi-view-dashboard"></i><span>Data Asuhan</span> </a>
                 </li>
@@ -148,9 +147,6 @@
                         <li><a href="/intervensi">Intervensi</a></li>
                     </ul>
                 </li>
-
-
-
             </ul>
             <div class="clearfix"></div>
         </div>

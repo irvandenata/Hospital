@@ -183,7 +183,6 @@ class ApiController extends Controller
     //KRITERIA
     public function getKriteria($id)
     {
-
         $item = KriteriaHasil::where('luaran_id', $id)->get();
         return response()->json($item);
     }
@@ -202,6 +201,8 @@ class ApiController extends Controller
         $item = new KriteriaHasil();
         $item->nama = $request->nama;
         $item->luaran_id = $request->luaran_id;
+        $item->kelompok = $request->kelompok;
+
         $item->save();
         return response()->json($item);
     }
@@ -214,9 +215,13 @@ class ApiController extends Controller
             return DataTables::of($assets)
                 ->addColumn('action', function ($asset) {
                     return '
-                    <a  class="btn btn-success btn-sm text-white  mx-1 mb-1" onclick="editChild(' . $asset->id . ',`' . $asset->nama . '`,`kriteria`)" >Edit</span></a>
+                    <a  class="btn btn-success btn-sm text-white  mx-1 mb-1" onclick="editChild(' . $asset->id . ',`' . $asset->nama . '`,`' . $asset->kelompok . '`,`kriteria`)" >Edit</span></a>
                                 <a id="delete" class="btn btn-danger btn-sm text-white  mx-1 mb-1" onclick="deleteKriteria(' . $asset->id . ')" >Delete</span></a>
                                 </div>';
+                })
+                ->addColumn('kelompok', function ($asset) {
+                    return str_replace(";", ", ", $asset->kelompok);
+
                 })
 
                 ->removeColumn('id')
@@ -231,6 +236,7 @@ class ApiController extends Controller
     {
         $item = KriteriaHasil::where('id', $id)->first();
         $item->nama = $request->nama;
+        $item->kelompok = $request->kelompok;
         $item->save();
         return response()->json($item);
     }

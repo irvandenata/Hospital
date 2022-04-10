@@ -139,10 +139,11 @@
     </script>
     <script>
         //KRITERIA
-        function editChild(id, data, jenis) {
+        function editChild(id, data,kelompok, jenis) {
 
             $('#idChild').val(id);
             $('.nama').val(data);
+            $('.kelompokEdit option[value="' + kelompok +'"]').prop("selected", true);
             sessionStorage.setItem('jenis', jenis)
             $('#modalChildForm').modal('show');
         }
@@ -165,6 +166,7 @@
                 data: {
                     nama: nama,
                     id: $('#idChild').val(),
+                    kelompok: $('.kelompokEdit').val()
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -235,7 +237,8 @@
                         dataType: 'json',
                         data: {
                             nama: nama,
-                            luaran_id: sessionStorage.getItem('idLuaran')
+                            luaran_id: sessionStorage.getItem('idLuaran'),
+                            kelompok: $(".kelompok").val()
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -386,6 +389,10 @@
                         data: 'nama',
                         orderable: true
                     },
+                     {
+                        data: 'kelompok',
+                        orderable: true
+                    },
                     {
                         data: 'action',
                         name: '#',
@@ -402,6 +409,7 @@
         function setData(result) {
             // console.log(result)
             $('input[name=id]').val(result.id);
+
             // $('input[name=luaran]').val(result.diagnosis);
             $('.desc').val(result.luaran);
             $('input[name=kode]').val(result.kode);
