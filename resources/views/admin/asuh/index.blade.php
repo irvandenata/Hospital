@@ -3,6 +3,7 @@
 @push('styles')
     <link href="{{ asset('admin') }}/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('admin') }}/plugins/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 @section('content')
 <div class="row justify-content-between">
@@ -48,6 +49,8 @@
     <script src="{{ asset('admin') }}/plugins/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/timepicker/bootstrap-timepicker.min.js"></script>
     <script src="{{ asset('admin') }}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
 
 @push('js')
@@ -145,6 +148,10 @@
 
 
         }
+
+        $('#diagnosa').select2()
+        $('#luaran').select2()
+        $('#intervensiSelect').select2()
         $('#create').on('click', function () {
             $('#kriteriahasil').empty()
             $('#subjektif').empty()

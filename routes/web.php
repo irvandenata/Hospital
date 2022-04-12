@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return redirect('/data-asuh');
 });
 Route::resource('/data-asuh', App\Http\Controllers\RencanaAsuhanController::class);
 Route::resource('/dashboard', App\Http\Controllers\DashboardController::class);
