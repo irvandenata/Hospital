@@ -54,6 +54,7 @@ class RencanaAsuhanResource extends JsonResource
             'penanggung_jawab' => $this->penanggung_jawab,
             'tanggal' => $this->tanggal,
             'jam' => $this->jam,
+            'status_pertama' => $this->status_pertama,
             'ppja' => $this->ppja,
             'diagnosa' => $this->diagnosa,
             'luaran' => $this->luaran,

@@ -1,6 +1,7 @@
 @extends('crud.modal')
 @section('input-form')
 <div class="row">
+
     <div class="col-6">
         <div class="form-group">
             <input type="hidden" name="id" id="id">
@@ -26,7 +27,7 @@
                     <div class="form-line mt-2">
                         <label for="name">Jam</label>
                         <div class="input-group">
-                            <input autocomplete="off" id="timepicker2"  name="jam" type="text" class="form-control wkt" required>
+                            <input autocomplete="off" id="timepicker2" name="jam" type="text" class="form-control wkt" required>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="mdi mdi-clock"></i></span>
                             </div>
@@ -48,6 +49,12 @@
                 <input type="text" name="ppja" class="form-control ppja" required>
             </div>
         </div>
+    </div>
+      <div class="col-12">
+         <div class="">
+              <input type="checkbox" id="status" name="status_pertama" value="1">
+               <label class="control-label ml-1">Pengkajian Pertama</label>
+            </div>
     </div>
     <div class="col-12">
         <div class="form-group">
@@ -111,9 +118,9 @@
             <label for="type">Ekspektasi Luaran</label>
             <select class="form-control show-tick ekspektasi" name="ekspektasi" id="luaran" required>
                 <option disabled selected value>---- Pilih Salah Satu ----</option>
-                    <option value="Meningkat">Meningkat</option>
-                    <option value="Menurun">Menurun</option>
-                    <option value="Membaik">Membaik</option>
+                <option value="Meningkat">Meningkat</option>
+                <option value="Menurun">Menurun</option>
+                <option value="Membaik">Membaik</option>
 
             </select>
         </div>
@@ -130,7 +137,7 @@
     <div class="col-10">
         <div class="form-group">
             <label for="type">Intervensi</label>
-            <select class="form-control show-tick" id="intervensiSelect" >
+            <select class="form-control show-tick" id="intervensiSelect">
                 <option disabled selected value>---- Pilih Salah Satu ----</option>
                 @foreach($intervensi as $item)
                     <option value="{!! $item->id !!}">{!! $item->intervensi_keperawatan !!} - {!! $item->kode !!}</option>

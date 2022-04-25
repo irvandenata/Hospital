@@ -84,8 +84,10 @@
                 <td colspan="1" valign="top"><span style="font-size: x-small;">{{ $item->getData()->ppja }}</span></td>
             </tr>
             <tr>
-                <td>
-                    <div style="height: 50px"></div>
+                <td align="center" valign="bottom"  style="height: 50px" colspan="12">
+                    <div >@if ($item->getData()->status_pertama == 1)
+                            <h2>DI ISI OLEH PPJA 24 JAM PERTAMA, HARUS DI ISI DENGAN LENGKAP</h2>
+                    @endif</div>
                 </td>
             </tr>
 

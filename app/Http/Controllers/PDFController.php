@@ -23,4 +23,8 @@ class PDFController extends Controller
 
         return view('PDF')->with('item',$data['item']);
     }
+
+
+
+
 }

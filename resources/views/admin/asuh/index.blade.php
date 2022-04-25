@@ -203,6 +203,11 @@
             $('.tgl').val(data.tanggal)
             $('.wkt').val(data.jam)
 
+            if(data.status_pertama==1){
+                $('#status').prop('checked', true);
+            }else{
+                $('#status').prop('checked', false);
+            }
             $('.ekspektasi option[value="' + data.ekspektasi + '"]').prop("selected", true);
             $('.ruang').val(data.nama_ruangan)
             $('.ppja').val(data.ppja)

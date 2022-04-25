@@ -84,6 +84,7 @@ class RencanaAsuhanController extends Controller
             'nama_ruangan' => $request->nama_ruangan,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
+            'status_pertama' => $request->status_pertama,
             'ppja' => $request->ppja,
             'diagnosa_id' => $request->diagnosa_id,
             'hasil_diagnosa' => $h_penyebab . "/" . $h_obj . '/' . $h_sbj,
@@ -154,6 +155,7 @@ class RencanaAsuhanController extends Controller
         $item->nama_ruangan = $request->nama_ruangan;
         $item->tanggal = $request->tanggal;
         $item->jam = $request->jam;
+        $item->status_pertama = $request->status_pertama;
         $item->ppja = $request->ppja;
         $item->diagnosa_id = $request->diagnosa_id;
         $item->hasil_diagnosa = $h_penyebab . "/" . $h_obj . '/' . $h_sbj;
