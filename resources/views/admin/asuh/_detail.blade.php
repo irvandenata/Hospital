@@ -19,7 +19,10 @@
                         <h3 id="room" class="text-bold"></h3>
                         <div>PPJA</div>
                         <h3 id="ppja" class="text-bold"></h3>
+                        <div>Nama Pasien</div>
+                        <h3 id="pasien" class="text-bold"></h3>
                     </div>
+
                 </div>
                 <hr>
                 <h3>Diagnosis Keperawatan</h3>

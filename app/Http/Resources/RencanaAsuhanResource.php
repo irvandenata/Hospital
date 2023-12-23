@@ -76,6 +76,7 @@ class RencanaAsuhanResource extends JsonResource
             ],
             'jumlah_intervensi' => $this->jumlah_intervensi,
             'intervensi' => $dataIntervensi,
+            'pasien' => $this->pasien,
 
         ];
     }

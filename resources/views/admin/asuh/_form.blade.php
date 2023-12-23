@@ -38,6 +38,7 @@
 
         </div>
     </div>
+
     <div class="col-6">
         <div class="form-group">
             <div class="form-line">
@@ -48,7 +49,12 @@
                 <label for="name">PPJA</label>
                 <input type="text" name="ppja" class="form-control ppja" required>
             </div>
+
         </div>
+    </div>
+    <div class="form-line my-2 col-12">
+        <label for="name">Nama Pasien</label>
+        <input type="text" name="pasien" class="form-control pasien" required>
     </div>
       <div class="col-12">
          <div class="">

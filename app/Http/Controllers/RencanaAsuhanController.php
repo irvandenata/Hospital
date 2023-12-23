@@ -84,6 +84,7 @@ class RencanaAsuhanController extends Controller
             'nama_ruangan' => $request->nama_ruangan,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
+            'pasien'=> $request->pasien,
             'status_pertama' => $request->status_pertama,
             'ppja' => $request->ppja,
             'diagnosa_id' => $request->diagnosa_id,
@@ -148,7 +149,16 @@ class RencanaAsuhanController extends Controller
     {
         $item = RencanaAsuhan::where('id', $id)->first();
         $intervensi = array();
-        $luaran = isset($request->hasil_kriteriahasil) && count($request->hasil_kriteriahasil) > 0 ? implode(',', $request->hasil_kriteriahasil) : '';
+        $luaran = '';
+        if ((isset($request->hasil_kriteriahasil) && count($request->hasil_kriteriahasil)) && (isset($request->hasil_kriteria2) && count($request->hasil_kriteria2))) {
+            foreach ($request->hasil_kriteriahasil as $key => $value) {
+                if ($key == 0) {
+                    $luaran = $value . '-' . $request->hasil_kriteria2[$key];
+                } else {
+                    $luaran = $luaran . "/" . $value . '-' . $request->hasil_kriteria2[$key];
+                }
+            }
+        }
         $h_sbj = isset($request->hasil_subjektif) && count($request->hasil_subjektif) > 0 ? implode(',', $request->hasil_subjektif) : '';
         $h_obj = isset($request->hasil_objektif) && count($request->hasil_objektif) > 0 ? implode(',', $request->hasil_objektif) : '';
         $h_penyebab = isset($request->hasil_penyebab) && count($request->hasil_penyebab) > 0 ? implode(',', $request->hasil_penyebab) : '';
@@ -162,6 +172,7 @@ class RencanaAsuhanController extends Controller
         $item->luaran_id = $request->luaran_id;
         $item->ekspektasi = $request->ekspektasi;
         $item->hasil_luaran = $luaran;
+        $item->pasien = $request->pasien;
         $item->penanggung_jawab = $request->penanggung_jawab;
         $item->jumlah_intervensi = $request->jumlah_intervensi;
         $item->tambahan_diagnosa_objektif = $request->tambahan_diagnosa_objektif;
